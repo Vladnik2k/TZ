@@ -9,8 +9,13 @@ export class Algorithm {
 
   startAlgorithm(): void {
     this.settings.resultText = '';
-    const text = this.getValidatedText();
-    this.settings.isNeedAnimation ? this.startWithAnimation(text) : this.startWithoutAnimation(text);
+    this.settings.validatedText = this.getValidatedText();
+
+    if (!this.settings.validatedText.length) {
+      return;
+    }
+
+    this.settings.isNeedAnimation ? this.startWithAnimation() : this.startWithoutAnimation();
   }
 
   getValidatedText(): string {
@@ -25,18 +30,20 @@ export class Algorithm {
     return text;
   }
 
-  startWithAnimation(text): void {
+  startWithAnimation(): void {
     let i = 0;
     this.settings.isAnimation = true;
     const interval = setInterval(() => {
-      text.length === i ? this.clearAnimationInfo(interval) : this.updateLetter(text[i++]);
+      this.settings.validatedText.length === i ?
+        this.clearAnimationInfo(interval) :
+        this.updateLetter(this.settings.validatedText[i++]);
     }, 1000);
   }
 
-  startWithoutAnimation(text): void {
+  startWithoutAnimation(): void {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < text.length; i++) {
-      this.updateLetter(text[i]);
+    for (let i = 0; i < this.settings.validatedText.length; i++) {
+      this.updateLetter(this.settings.validatedText[i]);
     }
   }
 

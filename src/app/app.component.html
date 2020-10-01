@@ -11,14 +11,18 @@
   <button (click)="click()" class="btn btn-primary">Магія</button>
 </div>
 
-<div>{{ settings.resultText }}</div>
+<div *ngIf="settings.validatedText">Валідований текст: {{ settings.validatedText }}</div>
+<div *ngIf="settings.resultText || settings.isAnimation">Текст результату: {{ settings.resultText }}</div>
 
 <table class="table table-bordered">
   <tr *ngFor="let line of settings.codes">
-    <td *ngFor="let i of line"
+    <td *ngFor="let cell of line"
         [ngClass]="{
-          'string-before': settings.stringBefore && i.indexOf(settings.stringBefore.toUpperCase()) !== -1,
-          'string-after': settings.stringAfter && i.indexOf(settings.stringAfter.toUpperCase()) !== -1
-        }">{{ i }}</td>
+          'string-before': settings.stringBefore && cell.indexOf(settings.stringBefore.toUpperCase()) !== -1,
+          'string-after': settings.stringAfter && cell.indexOf(settings.stringAfter.toUpperCase()) !== -1
+        }">
+      <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>
+      <span>{{ cell[cell.length - 1] }}</span>
+    </td>
   </tr>
 </table>

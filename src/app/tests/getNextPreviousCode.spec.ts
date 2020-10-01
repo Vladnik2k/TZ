@@ -53,12 +53,12 @@ describe('Get next / previous code test', () => {
 
   it('next (col more) en', () => {
     patchSettings(0, 2);
-    checkIsNextTrue(languagesWithCodes.en[1][3]);
+    checkIsNextTrue(languagesWithCodes.en[1][3][0]);
   });
 
   it('next (col more_M) en', () => {
     patchSettings(0, 7);
-    checkIsNextTrue(languagesWithCodes.en[1][3]);
+    checkIsNextTrue(languagesWithCodes.en[1][3][0]);
   });
 
   it('next (col minus one) en', () => {
