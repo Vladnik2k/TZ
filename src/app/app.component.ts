@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Algorithm} from './algorithm';
+import {LanguagesEnum} from './languages.enum';
+import {Settings} from './settings';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'TZalgorithm';
+  LanguagesEnum = LanguagesEnum;
+
+  settings: Settings;
+
+  constructor() {
+    this.settings = new Settings();
+  }
+
+  click() {
+    const normal = new Algorithm(this.settings);
+    normal.startAlgorithm();
+  }
 }
