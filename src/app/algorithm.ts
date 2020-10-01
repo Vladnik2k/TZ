@@ -8,19 +8,28 @@ export class Algorithm {
   }
 
   startAlgorithm(): void {
-    const text = this.settings.text.toUpperCase();
+    this.settings.resultText = '';
+    const text = this.getValidatedText();
     this.settings.isNeedAnimation ? this.startWithAnimation(text) : this.startWithoutAnimation(text);
+  }
+
+  getValidatedText(): string {
+    let text = this.settings.text;
+    for (let i = 0; i < text.length; i++) {
+      if (this.getCodeIndexes(text[i]) === '') {
+        text = text.slice(0, i).concat(text.slice(i + 1));
+        i--;
+      }
+    }
+
+    return text;
   }
 
   startWithAnimation(text): void {
     let i = 0;
     this.settings.isAnimation = true;
     const interval = setInterval(() => {
-      if (text.length === i) {
-        this.clearAnimationInfo(interval);
-      }
-
-      this.updateLetter(text[i++]);
+      text.length === i ? this.clearAnimationInfo(interval) : this.updateLetter(text[i++]);
     }, 1000);
   }
 
@@ -31,8 +40,9 @@ export class Algorithm {
     }
   }
 
-  updateLetter(letter): void {
-    const indexes = this.findSymbol(letter);
+  updateLetter(letter: string): void {
+    const isUpperCase = letter === letter.toUpperCase();
+    const indexes = this.getCodeIndexes(letter);
 
     if (indexes === '') {
       return;
@@ -40,7 +50,12 @@ export class Algorithm {
 
     const rowIndex = +indexes.split(' ')[0];
     const colIndex = +indexes.split(' ')[1];
-    this.settings.resultText += this.getNextSymbol(rowIndex, colIndex);
+
+    const updatedString = this.settings.isBack ?
+      this.getPreviousCode(rowIndex, colIndex) :
+      this.getNextCode(rowIndex, colIndex);
+
+    this.settings.resultText += isUpperCase ? updatedString.toUpperCase() : updatedString.toLowerCase();
 
     if (this.settings.isNeedAnimation) {
       this.settings.stringBefore = letter;
@@ -48,10 +63,12 @@ export class Algorithm {
     }
   }
 
-  findSymbol(symbol): string {
+  getCodeIndexes(code: string): string {
+    code = code.toUpperCase();
+
     for (let i = 0; i < this.settings.codes.length; i++) {
       for (let j = 0; j < this.settings.codes[i].length; j++) {
-        if (this.settings.codes[i][j].indexOf(symbol) !== -1) {
+        if (this.settings.codes[i][j].indexOf(code) !== -1) {
           return i + ' ' + j;
         }
       }
@@ -60,7 +77,7 @@ export class Algorithm {
     return '';
   }
 
-  getNextSymbol(i: number, j: number): string {
+  getNextCode(i: number, j: number): string {
     let nextRowIndex = (i + this.settings.additionalRowIndex) % this.settings.codes.length;
     if (nextRowIndex < 0) { nextRowIndex += this.settings.codes.length; }
     let nextColIndex = (j + this.settings.additionalColIndex) % this.settings.codes[0].length;
@@ -69,9 +86,9 @@ export class Algorithm {
     return this.settings.codes[nextRowIndex][nextColIndex][0];
   }
 
-  getPreviousSymbol(i: number, j: number): string {
+  getPreviousCode(i: number, j: number): string {
     this.changeToPrev();
-    const res = this.getNextSymbol(i, j);
+    const res = this.getNextCode(i, j);
     this.changeToPrev();
 
     return res;

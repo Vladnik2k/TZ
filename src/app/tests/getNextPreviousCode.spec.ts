@@ -13,7 +13,7 @@ import {languagesWithCodes} from '../constants';
  * more_M = checking more than one value changes (with cycle)
  * en = checking with en codes
  */
-describe('Get next / previous value test', () => {
+describe('Get next / previous code test', () => {
   const settings = new Settings();
 
   it('next (row one) en', () => {
@@ -101,14 +101,14 @@ describe('Get next / previous value test', () => {
     settings.additionalColIndex = j;
   }
 
-  function checkIsNextTrue(expectedSymbol: string): void {
+  function checkIsNextTrue(expectedCode: string): void {
     const algorithm = new Algorithm(settings);
-    expect(algorithm.getNextSymbol(1, 1)).toEqual(expectedSymbol);
+    expect(algorithm.getNextCode(1, 1)).toEqual(expectedCode);
   }
 
-  function checkIsPrevTrue(expectedSymbol: string): void {
+  function checkIsPrevTrue(expectedCode: string): void {
     const algorithm = new Algorithm(settings);
-    expect(algorithm.getPreviousSymbol(1, 1)).toEqual(expectedSymbol);
+    expect(algorithm.getPreviousCode(1, 1)).toEqual(expectedCode);
   }
 });
 

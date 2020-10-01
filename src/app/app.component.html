@@ -17,8 +17,8 @@
   <tr *ngFor="let line of settings.codes">
     <td *ngFor="let i of line"
         [ngClass]="{
-          'string-before': settings.stringBefore && i.indexOf(settings.stringBefore) !== -1,
-          'string-after': settings.stringBefore && i.indexOf(settings.stringAfter) !== -1
+          'string-before': settings.stringBefore && i.indexOf(settings.stringBefore.toUpperCase()) !== -1,
+          'string-after': settings.stringAfter && i.indexOf(settings.stringAfter.toUpperCase()) !== -1
         }">{{ i }}</td>
   </tr>
 </table>
