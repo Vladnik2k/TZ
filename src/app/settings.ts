@@ -8,4 +8,10 @@ export class Settings {
   additionalColIndex = 0;
   codes = languagesWithCodes.en;
   method = MethodEnum.NORMAL;
+  isBack = false;
+  isNeedAnimation = false;
+  isAnimation = false;
+
+  stringBefore: string;
+  stringAfter: string;
 }

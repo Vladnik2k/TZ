@@ -2,11 +2,23 @@
   <label for="text">Введіть текст</label>
   <input id="text" type="text" [(ngModel)]="settings.text">
 
+  <label for="isAnimation">Чи потрібна анімація</label>
+  <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">
+
+  <label for="isBack">Режим розшифрування</label>
+  <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
+
   <button (click)="click()" class="btn btn-primary">Магія</button>
 </div>
 
+<div>{{ settings.resultText }}</div>
+
 <table class="table table-bordered">
   <tr *ngFor="let line of settings.codes">
-    <td *ngFor="let i of line">{{ i }}</td>
+    <td *ngFor="let i of line"
+        [ngClass]="{
+          'string-before': settings.stringBefore && i.indexOf(settings.stringBefore) !== -1,
+          'string-after': settings.stringBefore && i.indexOf(settings.stringAfter) !== -1
+        }">{{ i }}</td>
   </tr>
 </table>
