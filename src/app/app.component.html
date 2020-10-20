@@ -1,46 +1,46 @@
-<div class="main">
-  <div class="form" [ngClass]="settings.isAnimation ? 'hide' : ''">
-    <div class="first-block">
-      <label for="text">Введіть текст</label>
-      <input id="text" type="text" [(ngModel)]="settings.text">
-    </div>
+<!--<div class="main">-->
+<!--  <div class="form" [ngClass]="settings.isAnimation ? 'hide' : ''">-->
+<!--    <div class="first-block">-->
+<!--      <label for="text">Введіть текст</label>-->
+<!--      <input id="text" type="text" [(ngModel)]="settings.text">-->
+<!--    </div>-->
 
-    <div class="checkboxes">
-      <div>
-        <label for="isAnimation">Чи потрібна анімація</label>
-        <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">
-      </div>
+<!--    <div class="checkboxes">-->
+<!--      <div>-->
+<!--        <label for="isAnimation">Чи потрібна анімація</label>-->
+<!--        <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">-->
+<!--      </div>-->
 
-      <div>
-        <label for="isBack">Режим розшифрування</label>
-        <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
-      </div>
-    </div>
+<!--      <div>-->
+<!--        <label for="isBack">Режим розшифрування</label>-->
+<!--        <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <button (click)="click()" class="btn btn-primary">Магія</button>
-  </div>
+<!--    <button (click)="click()" class="btn btn-primary">Магія</button>-->
+<!--  </div>-->
 
-  <div class="info">
-    <div>
-      <div [ngClass]="settings.validatedText ? '' : 'hide'">Валідований текст: {{ settings.validatedText }}</div>
-      <div [ngClass]="settings.resultText || settings.isAnimation ? '' : 'hide'">Текст результату: {{ settings.resultText }}
-        <img *ngIf="!settings.isAnimation" (click)="useResult()" src="../assets/paper-plane.png" alt="plane">
-      </div>
-    </div>
+<!--  <div class="info">-->
+<!--    <div>-->
+<!--      <div [ngClass]="settings.validatedText ? '' : 'hide'">Валідований текст: {{ settings.validatedText }}</div>-->
+<!--      <div [ngClass]="settings.resultText || settings.isAnimation ? '' : 'hide'">Текст результату: {{ settings.resultText }}-->
+<!--        <img *ngIf="!settings.isAnimation" (click)="useResult()" src="../assets/paper-plane.png" alt="plane">-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <table class="table table-bordered">
-      <tr *ngFor="let line of settings.codes">
-        <td *ngFor="let cell of line"
-            [ngClass]="{
-            'string-before': settings.stringBefore && cell.indexOf(settings.stringBefore.toUpperCase()) !== -1,
-            'string-after': settings.stringAfter && cell.indexOf(settings.stringAfter.toUpperCase()) !== -1
-          }">
-        <span>
-          <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>
-          <span>{{ cell[cell.length - 1] }}</span>
-        </span>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
+<!--    <table class="table table-bordered">-->
+<!--      <tr *ngFor="let line of settings.codes">-->
+<!--        <td *ngFor="let cell of line"-->
+<!--            [ngClass]="{-->
+<!--            'string-before': settings.stringBefore && cell.indexOf(settings.stringBefore.toUpperCase()) !== -1,-->
+<!--            'string-after': settings.stringAfter && cell.indexOf(settings.stringAfter.toUpperCase()) !== -1-->
+<!--          }">-->
+<!--        <span>-->
+<!--          <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>-->
+<!--          <span>{{ cell[cell.length - 1] }}</span>-->
+<!--        </span>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</div>-->
