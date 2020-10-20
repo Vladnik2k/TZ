@@ -1,46 +1,15 @@
-.form {
-  width: 320px;
+.main {
   display: flex;
-  flex-direction: column;
+  margin: 20px;
+}
+
+.form {
+  width: fit-content;
   align-items: center;
-  margin: 20px auto;
+  margin-right: 20px;
 
   > div {
-    width: 100%;
     margin-bottom: 10px;
-  }
-
-  .first-block {
-    display: flex;
-
-    label {
-      white-space: nowrap;
-    }
-
-    input {
-      width: 100%;
-    }
-  }
-
-  .second-block {
-    display: flex;
-
-    .checkboxes {
-      width: 65%;
-      margin-right: 10px;
-
-      div {
-        white-space: nowrap;
-      }
-
-      div:last-child > label{
-        margin-bottom: 0;
-      }
-    }
-
-    button {
-      width: 100%;
-    }
   }
 
   input {
@@ -56,31 +25,34 @@
   }
 }
 
-img {
-  width: 16px;
-}
-
-img:hover {
-  cursor: pointer;
-}
-
-.table {
-  margin: 20px auto;
-  width: fit-content;
-
-  .string-before {
-    background-color: lightblue;
-  }
-
-  .string-after {
-    background-color: darkolivegreen;
-  }
-
-  td {
-    text-align: center;
-  }
-}
-
 .hide {
   visibility: hidden;
+}
+
+.info {
+  width: fit-content;
+  img {
+    width: 16px;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+
+  .table {
+    margin: 20px auto;
+    width: fit-content;
+
+    .string-before {
+      background-color: lightblue;
+    }
+
+    .string-after {
+      background-color: darkolivegreen;
+    }
+
+    td {
+      text-align: center;
+    }
+  }
 }
