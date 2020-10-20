@@ -44,6 +44,10 @@ export class Standard extends AlgorithmBase {
 
     const i = Math.floor(indexes / 10) - 1;
     const j = indexes % 10 - 1;
+    if (i >= this.settings.code.length || i < 0 ||
+      j >= this.settings.code[0].length || j < 0) {
+      part.status = PartStatusesEnum.ERROR; return;
+    }
 
     part.result = this.settings.code[i][j][0].toLowerCase();
     part.status = PartStatusesEnum.DONE;
