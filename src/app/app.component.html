@@ -1,18 +1,32 @@
 <div class="form">
-  <label for="text">Введіть текст</label>
-  <input id="text" type="text" [(ngModel)]="settings.text">
+  <div class="first-block">
+    <label for="text">Введіть текст</label>
+    <input id="text" type="text" [(ngModel)]="settings.text">
+  </div>
 
-  <label for="isAnimation">Чи потрібна анімація</label>
-  <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">
+  <div [ngClass]="settings.isAnimation ? 'hide' : ''" class="second-block">
+    <div class="checkboxes">
+      <div>
+        <label for="isAnimation">Чи потрібна анімація</label>
+        <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">
+      </div>
 
-  <label for="isBack">Режим розшифрування</label>
-  <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
+      <div>
+        <label for="isBack">Режим розшифрування</label>
+        <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
+      </div>
+    </div>
 
-  <button (click)="click()" class="btn btn-primary">Магія</button>
+    <button (click)="click()" class="btn btn-primary">Магія</button>
+  </div>
+
+  <div>
+    <div *ngIf="settings.validatedText">Валідований текст: {{ settings.validatedText }}</div>
+    <div *ngIf="settings.resultText || settings.isAnimation">Текст результату: {{ settings.resultText }}
+      <img *ngIf="!settings.isAnimation" (click)="useResult()" src="../assets/paper-plane.png" alt="plane">
+    </div>
+  </div>
 </div>
-
-<div *ngIf="settings.validatedText">Валідований текст: {{ settings.validatedText }}</div>
-<div *ngIf="settings.resultText || settings.isAnimation">Текст результату: {{ settings.resultText }}</div>
 
 <table class="table table-bordered">
   <tr *ngFor="let line of settings.codes">
@@ -21,8 +35,10 @@
           'string-before': settings.stringBefore && cell.indexOf(settings.stringBefore.toUpperCase()) !== -1,
           'string-after': settings.stringAfter && cell.indexOf(settings.stringAfter.toUpperCase()) !== -1
         }">
-      <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>
-      <span>{{ cell[cell.length - 1] }}</span>
+      <span>
+        <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>
+        <span>{{ cell[cell.length - 1] }}</span>
+      </span>
     </td>
   </tr>
 </table>
