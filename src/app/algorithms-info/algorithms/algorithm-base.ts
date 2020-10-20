@@ -22,9 +22,11 @@ export abstract class AlgorithmBase {
 
   startAnimation(): void {
     let i = 0;
+    this.settings.isAnimation = true;
     const interval = setInterval(() => {
       if (this.settings.parts.length === i) {
         this.fillResult();
+        this.settings.isAnimation = false;
         clearInterval(interval);
       }
 

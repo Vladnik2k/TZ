@@ -1,46 +1,56 @@
-<!--<div class="main">-->
-<!--  <div class="form" [ngClass]="settings.isAnimation ? 'hide' : ''">-->
-<!--    <div class="first-block">-->
-<!--      <label for="text">Введіть текст</label>-->
-<!--      <input id="text" type="text" [(ngModel)]="settings.text">-->
-<!--    </div>-->
+<div class="form" [ngClass]="settings.isAnimation ? 'hide' : ''">
+  <div class="first-block">
+    <label for="text">Введіть текст</label>
+    <input id="text" type="text" [(ngModel)]="text">
+    <span *ngIf="text === translatedText && algorithm && algorithm.result">
+      <img src="https://img.icons8.com/android/24/000000/arrow.png" alt="arrow"/>
+      {{ algorithm?.result }}
+      <img class="copy" src="https://img.icons8.com/doodle/24/000000/spinner-arrow.png" alt="copy" (click)="useResult()"/>
+    </span>
+  </div>
 
-<!--    <div class="checkboxes">-->
-<!--      <div>-->
-<!--        <label for="isAnimation">Чи потрібна анімація</label>-->
-<!--        <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">-->
-<!--      </div>-->
+  <div class="checkboxes">
+    <span>
+      <label for="isAnimation">Чи потрібна анімація</label>
+      <input id="isAnimation" type="checkbox" [(ngModel)]="settings.isNeedAnimation">
+    </span>
 
-<!--      <div>-->
-<!--        <label for="isBack">Режим розшифрування</label>-->
-<!--        <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">-->
-<!--      </div>-->
-<!--    </div>-->
+    <span>
+      <label for="isBack">Режим розшифрування</label>
+      <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
+    </span>
+  </div>
 
-<!--    <button (click)="click()" class="btn btn-primary">Магія</button>-->
-<!--  </div>-->
+  <button (click)="click()" class="btn btn-primary">Магія</button>
+</div>
 
-<!--  <div class="info">-->
-<!--    <div>-->
-<!--      <div [ngClass]="settings.validatedText ? '' : 'hide'">Валідований текст: {{ settings.validatedText }}</div>-->
-<!--      <div [ngClass]="settings.resultText || settings.isAnimation ? '' : 'hide'">Текст результату: {{ settings.resultText }}-->
-<!--        <img *ngIf="!settings.isAnimation" (click)="useResult()" src="../assets/paper-plane.png" alt="plane">-->
-<!--      </div>-->
-<!--    </div>-->
+<div class="info">
+  <table class="table table-bordered">
+    <tr>
+      <td *ngFor="let part of settings.parts"
+        [ngClass]="{
+          'error': part.status === status.ERROR,
+          'in-progress': part.status === status.IN_PROGRESS,
+          'done': part.status === status.DONE
+        }">
+        {{ part.before }}
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let part of settings.parts">
+        {{ part.result }}
+      </td>
+    </tr>
+  </table>
 
-<!--    <table class="table table-bordered">-->
-<!--      <tr *ngFor="let line of settings.codes">-->
-<!--        <td *ngFor="let cell of line"-->
-<!--            [ngClass]="{-->
-<!--            'string-before': settings.stringBefore && cell.indexOf(settings.stringBefore.toUpperCase()) !== -1,-->
-<!--            'string-after': settings.stringAfter && cell.indexOf(settings.stringAfter.toUpperCase()) !== -1-->
-<!--          }">-->
-<!--        <span>-->
-<!--          <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>-->
-<!--          <span>{{ cell[cell.length - 1] }}</span>-->
-<!--        </span>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--    </table>-->
-<!--  </div>-->
-<!--</div>-->
+  <table class="table table-bordered">
+    <tr *ngFor="let line of settings.code">
+      <td *ngFor="let cell of line">
+        <span>
+          <span *ngFor="let c of cell.slice(0, cell.length - 1).split('')">{{ c }}/</span>
+          <span>{{ cell[cell.length - 1] }}</span>
+        </span>
+      </td>
+    </tr>
+  </table>
+</div>

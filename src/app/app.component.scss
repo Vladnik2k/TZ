@@ -1,19 +1,14 @@
-.main {
-  display: flex;
-  margin: 20px;
-}
-
 .form {
   width: fit-content;
   align-items: center;
-  margin-right: 20px;
+  margin: 20px;
 
   > div {
     margin-bottom: 10px;
   }
 
   input {
-    margin-left: 10px;
+    margin: 0 10px;
   }
 
   label:hover {
@@ -23,6 +18,14 @@
   button {
     width: 100px;
   }
+
+  .checkboxes > * {
+    margin-right: 20px;
+  }
+
+  .copy:hover {
+    cursor: pointer;
+  }
 }
 
 .hide {
@@ -30,18 +33,22 @@
 }
 
 .info {
-  width: fit-content;
-  img {
-    width: 16px;
-  }
-
-  img:hover {
-    cursor: pointer;
-  }
+  margin: 20px;
 
   .table {
-    margin: 20px auto;
     width: fit-content;
+
+    .error {
+      background-color: lightcoral;
+    }
+
+    .in-progress {
+      background-color: lightblue;
+    }
+
+    .done {
+      background-color: yellowgreen;
+    }
 
     .string-before {
       background-color: lightblue;

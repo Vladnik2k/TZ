@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import {Settings} from './algorithms-info/settings';
+import {Standard} from './algorithms-info/algorithms/standard';
+import {AlgorithmBase} from './algorithms-info/algorithms/algorithm-base';
+import {PartStatusesEnum} from './algorithms-info/part/part-statuses.enum';
 
 
 @Component({
@@ -7,19 +11,25 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // settings: Settings;
-  //
+  text: string;
+  settings: Settings;
+  algorithm: AlgorithmBase;
+  status = PartStatusesEnum;
+
+  translatedText: string;
+
   constructor() {
-    // this.settings = new Settings();
+    this.settings = new Settings();
   }
-  //
-  // click(): void {
-  //   const normal = new Algorithm(this.settings);
-  //   normal.startAlgorithm();
-  // }
-  //
-  // useResult(): void {
-  //   this.settings.text = this.settings.resultText;
-  //   this.settings.isBack = !this.settings.isBack;
-  // }
+
+  click(): void {
+    this.algorithm = new Standard(this.settings);
+    this.algorithm.startAlgorithm(this.text);
+    this.translatedText = this.text;
+  }
+
+  useResult(): void {
+    this.text = this.algorithm.result;
+    this.settings.isBack = !this.settings.isBack;
+  }
 }
