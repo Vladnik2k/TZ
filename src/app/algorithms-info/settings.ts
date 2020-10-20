@@ -9,5 +9,8 @@ export class Settings {
   isBack = false;
   isNeedAnimation = false;
 
+  additionalRowIndex = 1;
+  additionalColIndex = 1;
+
   isAnimation = false;
 }
