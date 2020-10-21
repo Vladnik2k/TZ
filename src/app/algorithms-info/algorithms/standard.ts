@@ -22,8 +22,6 @@ export class Standard extends AlgorithmBase {
   }
 
   getNextValue(part: Part): void {
-    part.status = PartStatusesEnum.IN_PROGRESS;
-
     for (let i = 0; i < this.settings.code.length; i++) {
       for (let j = 0; j < this.settings.code[i].length; j++) {
         if (this.settings.code[i][j].indexOf(part.before.toUpperCase()) !== -1) {
@@ -38,7 +36,6 @@ export class Standard extends AlgorithmBase {
   }
 
   getBackValue(part: Part): void {
-    part.status = PartStatusesEnum.IN_PROGRESS;
     const indexes = +part.before;
     if (!indexes) { part.status = PartStatusesEnum.ERROR; return; }
 

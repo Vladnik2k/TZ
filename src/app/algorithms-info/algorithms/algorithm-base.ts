@@ -23,14 +23,16 @@ export abstract class AlgorithmBase {
   startAnimation(): void {
     let i = 0;
     this.settings.isAnimation = true;
+    this.settings.parts[i].status = PartStatusesEnum.IN_PROGRESS;
     const interval = setInterval(() => {
+      this.updatePart(this.settings.parts[i]);
+      ++i;
       if (this.settings.parts.length <= i) {
         this.fillResult();
         this.settings.isAnimation = false;
         clearInterval(interval);
       } else {
-        this.updatePart(this.settings.parts[i]);
-        ++i;
+        this.settings.parts[i].status = PartStatusesEnum.IN_PROGRESS;
       }
     }, 1000);
   }

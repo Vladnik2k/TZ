@@ -2,7 +2,7 @@
   <div>
     <label for="text">Введіть текст</label>
     <input id="text" type="text" [(ngModel)]="text">
-    <span class="result" *ngIf="text === translatedText && algorithm && algorithm.result">
+    <span class="result" *ngIf="text === translatedText && algorithm && algorithm.result && methodSame">
       <img src="https://img.icons8.com/android/24/000000/arrow.png" alt="arrow"/>
       {{ algorithm?.result }}
       <img class="copy" src="https://img.icons8.com/doodle/24/000000/spinner-arrow.png" alt="copy" (click)="useResult()"/>
@@ -23,11 +23,11 @@
 
   <div>
     <label for="algorithmType">Тип шифрування</label>
-    <select (change)="changeAlgorithm($event)" name="algorithmType" id="algorithmType">
-      <option value="STANDARD">стандартне</option>
-      <option value="SYMBOL">символьне</option>
-      <option value="SYMBOL_CUSTOM">символьне кастомне</option>
-      <option value="NUMBER_CUSTOM">числове кастомне</option>
+    <select (change)="changeAlgorithm($event.target.value)" name="algorithmType" id="algorithmType">
+      <option value="{{ method.STANDARD }}">стандартне</option>
+      <option value="{{ method.SYMBOL }}">символьне</option>
+      <option value="{{ method.SYMBOL_CUSTOM }}">символьне кастомне</option>
+      <option value="{{ method.NUMBER_CUSTOM }}">числове кастомне</option>
     </select>
   </div>
 

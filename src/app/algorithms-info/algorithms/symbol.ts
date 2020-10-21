@@ -30,8 +30,6 @@ export class Symbol extends AlgorithmBase {
   }
 
   updateValue(part: Part, additionalRowIndex: number, additionalColIndex: number): void {
-    part.status = PartStatusesEnum.IN_PROGRESS;
-
     const isUpperCase = part.before === part.before.toUpperCase();
 
     for (let i = 0; i < this.settings.code.length; i++) {
