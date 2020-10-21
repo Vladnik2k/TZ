@@ -2,7 +2,7 @@
   <div>
     <label for="text">Введіть текст</label>
     <input id="text" type="text" [(ngModel)]="text">
-    <span class="result" *ngIf="text === translatedText && algorithm && algorithm.result && methodSame">
+    <span class="result" *ngIf="text === translatedText && algorithm && algorithm.result && translatedMethod === selectedMethod">
       <img src="https://img.icons8.com/android/24/000000/arrow.png" alt="arrow"/>
       {{ algorithm?.result }}
       <img class="copy" src="https://img.icons8.com/doodle/24/000000/spinner-arrow.png" alt="copy" (click)="useResult()"/>
