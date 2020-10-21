@@ -6,7 +6,7 @@ export abstract class AlgorithmBase {
   public settings: Settings;
   public result: string;
 
-  constructor(settings: Settings) {
+  protected constructor(settings: Settings) {
     this.settings = settings;
   }
 
@@ -20,7 +20,7 @@ export abstract class AlgorithmBase {
     }
   }
 
-  startAnimation(): void {
+  private startAnimation(): void {
     let i = 0;
     this.settings.isAnimation = true;
     this.settings.parts[i].status = PartStatusesEnum.IN_PROGRESS;
@@ -37,19 +37,19 @@ export abstract class AlgorithmBase {
     }, 1000);
   }
 
-  updatePart(part: Part): void {
+  private updatePart(part: Part): void {
     this.settings.isBack ? this.getBackValue(part) : this.getNextValue(part);
   }
 
-  fillResult(): void {
+  private fillResult(): void {
     this.result = this.settings.parts
       .filter(part => part.status === PartStatusesEnum.DONE)
       .map(part => part.result)
       .join('');
   }
 
-  abstract divideTextForNext(text: string): void;
-  abstract divideTextForBack(text: string): void;
-  abstract getNextValue(part: Part): void;
-  abstract getBackValue(part: Part): void;
+  protected abstract divideTextForNext(text: string): void;
+  protected abstract divideTextForBack(text: string): void;
+  protected abstract getNextValue(part: Part): void;
+  protected abstract getBackValue(part: Part): void;
 }

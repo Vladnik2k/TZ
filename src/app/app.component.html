@@ -21,7 +21,7 @@
     </span>
   </div>
 
-  <div>
+  <div class="crypto">
     <label for="algorithmType">Тип шифрування</label>
     <select (change)="changeAlgorithm($event.target.value)" name="algorithmType" id="algorithmType">
       <option value="{{ method.STANDARD }}">стандартне</option>
@@ -29,6 +29,16 @@
       <option value="{{ method.SYMBOL_CUSTOM }}">символьне кастомне</option>
       <option value="{{ method.NUMBER_CUSTOM }}">числове кастомне</option>
     </select>
+
+    <span *ngIf="selectedMethod === method.SYMBOL || selectedMethod === method.SYMBOL_CUSTOM">
+      <label for="changeX">Зміщення по рядку</label>
+      <input id="changeX" type="number" [(ngModel)]="settings.additionalRowIndex">
+    </span>
+
+    <span *ngIf="selectedMethod === method.SYMBOL || selectedMethod === method.SYMBOL_CUSTOM">
+      <label for="changeY">Зміщення по колонці</label>
+      <input id="changeY" type="number" [(ngModel)]="settings.additionalColIndex">
+    </span>
   </div>
 
   <button (click)="click()" class="btn btn-primary">Магія</button>

@@ -7,21 +7,21 @@ export class Standard extends AlgorithmBase {
     super(settings);
   }
 
-  divideTextForNext(text: string): void {
+  protected divideTextForNext(text: string): void {
     this.settings.parts = new Array<Part>();
     for (const symbol of text) {
       this.settings.parts.push(new Part(symbol));
     }
   }
 
-  divideTextForBack(text: string): void {
+  protected divideTextForBack(text: string): void {
     this.settings.parts = new Array<Part>();
     for (let i = 0; i < text.length; i += 2) {
       this.settings.parts.push(new Part(text.slice(i, i + 2)));
     }
   }
 
-  getNextValue(part: Part): void {
+  protected getNextValue(part: Part): void {
     for (let i = 0; i < this.settings.code.length; i++) {
       for (let j = 0; j < this.settings.code[i].length; j++) {
         if (this.settings.code[i][j].indexOf(part.before.toUpperCase()) !== -1) {
@@ -35,7 +35,7 @@ export class Standard extends AlgorithmBase {
     part.status = PartStatusesEnum.ERROR;
   }
 
-  getBackValue(part: Part): void {
+  protected getBackValue(part: Part): void {
     const indexes = +part.before;
     if (!indexes) { part.status = PartStatusesEnum.ERROR; return; }
 

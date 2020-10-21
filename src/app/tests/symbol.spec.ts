@@ -3,6 +3,8 @@ import {Symbol} from '../algorithms-info/algorithms/symbol';
 
 describe('Get code indexes test', () => {
   const algorithm = new Symbol(new Settings());
+  algorithm.settings.additionalColIndex = 11;
+  algorithm.settings.additionalRowIndex = -9;
 
   it('text', () => {
     checkRelation('text', 'zfdz');

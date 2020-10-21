@@ -4,8 +4,8 @@ import {Standard} from './algorithms-info/algorithms/standard';
 import {AlgorithmBase} from './algorithms-info/algorithms/algorithm-base';
 import {PartStatusesEnum} from './algorithms-info/part/part-statuses.enum';
 import {MethodEnum} from './algorithms-info/method.enum';
-import {Symbol} from "./algorithms-info/algorithms/symbol";
-import {en} from "./constants";
+import {Symbol} from './algorithms-info/algorithms/symbol';
+import {en} from './constants';
 
 
 @Component({
@@ -30,6 +30,7 @@ export class AppComponent {
   }
 
   click(): void {
+    if (!this.text) { return; }
     this.algorithm = this.selectedMethod === this.method.SYMBOL_CUSTOM || this.selectedMethod === this.method.SYMBOL ?
       new Symbol(this.settings) : new Standard(this.settings);
     this.algorithm.startAlgorithm(this.text);

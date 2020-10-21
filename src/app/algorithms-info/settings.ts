@@ -10,7 +10,7 @@ export class Settings {
   isNeedAnimation = false;
 
   additionalRowIndex = 1;
-  additionalColIndex = 1;
+  additionalColIndex = 0;
 
   isAnimation = false;
 }
