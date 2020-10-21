@@ -24,14 +24,14 @@ export abstract class AlgorithmBase {
     let i = 0;
     this.settings.isAnimation = true;
     const interval = setInterval(() => {
-      if (this.settings.parts.length === i) {
+      if (this.settings.parts.length <= i) {
         this.fillResult();
         this.settings.isAnimation = false;
         clearInterval(interval);
+      } else {
+        this.updatePart(this.settings.parts[i]);
+        ++i;
       }
-
-      this.updatePart(this.settings.parts[i]);
-      ++i;
     }, 1000);
   }
 

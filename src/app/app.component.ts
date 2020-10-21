@@ -32,4 +32,8 @@ export class AppComponent {
     this.text = this.algorithm.result;
     this.settings.isBack = !this.settings.isBack;
   }
+
+  changeAlgorithm($event): void {
+    console.log($event);
+  }
 }

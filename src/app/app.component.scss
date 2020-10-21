@@ -3,12 +3,12 @@
   align-items: center;
   margin: 20px;
 
-  > div {
+  > * {
     margin-bottom: 10px;
   }
 
-  input {
-    margin: 0 10px;
+  label {
+    margin: 0 10px 0 0;
   }
 
   label:hover {
@@ -25,6 +25,10 @@
 
   .copy:hover {
     cursor: pointer;
+  }
+
+  .result {
+    margin-left: 10px;
   }
 }
 

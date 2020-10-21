@@ -1,8 +1,8 @@
 <div class="form" [ngClass]="settings.isAnimation ? 'hide' : ''">
-  <div class="first-block">
+  <div>
     <label for="text">Введіть текст</label>
     <input id="text" type="text" [(ngModel)]="text">
-    <span *ngIf="text === translatedText && algorithm && algorithm.result">
+    <span class="result" *ngIf="text === translatedText && algorithm && algorithm.result">
       <img src="https://img.icons8.com/android/24/000000/arrow.png" alt="arrow"/>
       {{ algorithm?.result }}
       <img class="copy" src="https://img.icons8.com/doodle/24/000000/spinner-arrow.png" alt="copy" (click)="useResult()"/>
@@ -19,6 +19,16 @@
       <label for="isBack">Режим розшифрування</label>
       <input id="isBack" type="checkbox" [(ngModel)]="settings.isBack">
     </span>
+  </div>
+
+  <div>
+    <label for="algorithmType">Тип шифрування</label>
+    <select (change)="changeAlgorithm($event)" name="algorithmType" id="algorithmType">
+      <option value="STANDARD">стандартне</option>
+      <option value="SYMBOL">символьне</option>
+      <option value="SYMBOL_CUSTOM">символьне кастомне</option>
+      <option value="NUMBER_CUSTOM">числове кастомне</option>
+    </select>
   </div>
 
   <button (click)="click()" class="btn btn-primary">Магія</button>
