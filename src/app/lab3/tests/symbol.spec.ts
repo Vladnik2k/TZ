@@ -1,5 +1,5 @@
-import {Settings} from '../algorithms-info/settings';
-import {Symbol} from '../algorithms-info/algorithms/symbol';
+import {Settings} from '../settings';
+import {Symbol} from '../algorithms/symbol';
 
 describe('Get code indexes test', () => {
   const algorithm = new Symbol(new Settings());

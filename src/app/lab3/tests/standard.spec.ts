@@ -1,5 +1,5 @@
-import {Standard} from '../algorithms-info/algorithms/standard';
-import {Settings} from '../algorithms-info/settings';
+import {Standard} from '../algorithms/standard';
+import {Settings} from '../settings';
 
 describe('Get code indexes test', () => {
   const algorithm = new Standard(new Settings());

@@ -1,5 +1,5 @@
 import {Part} from './part/part';
-import {en} from '../constants';
+import {en} from './constants';
 
 export class Settings {
   parts: Array<Part>;
