@@ -1,1 +1,21 @@
-<p>lab4 works!</p>
+<div class="forms">
+  <form class="form" [formGroup]="addPasswordForm">
+    <div>
+      <label for="newPassword">Створення паролю</label>
+      <div class="input">
+        <input
+          id="newPassword"
+          class="form-control"
+          [ngClass]="isNewValid ? 'is-valid' : 'is-invalid'" type="password"
+          formControlName="newPassword">
+        <div *ngIf="isNewValid" class="feedback valid-feedback">Виглядає правильним</div>
+        <div *ngIf="!isNewValid" class="feedback invalid-feedback">
+          <div *ngFor="let message of getErrors('newPassword')">
+            {{ message }} <br>
+          </div>
+        </div>
+      </div>
+      <button [disabled]="!isNewValid" class="btn btn-primary" (click)="save()">Зберегти</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+.form {
+  margin: 20px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  label {
+    margin: 0;
+  }
+
+  .input {
+    width: 250px;
+    margin: 0 10px;
+    position: relative;
+
+    .feedback {
+      position: absolute;
+      bottom: -20px;
+    }
+  }
+}
