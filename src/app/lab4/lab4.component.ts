@@ -23,6 +23,12 @@ export class Lab4Component implements OnInit {
       newPassword: new FormControl('', [
         Validators.required,
         NewPasswordValidators.forbiddenDictionaryValidator(),
+        NewPasswordValidators.atLeastBigLetterValidator(),
+        NewPasswordValidators.atLeastSmallLetterValidator(),
+        NewPasswordValidators.atLeastOneDigitValidator(),
+        NewPasswordValidators.atLeastOneAddSymbolValidator(),
+        NewPasswordValidators.notLessSymbolsValidator(),
+        NewPasswordValidators.notMoreSymbolsValidator(),
       ])
     });
   }

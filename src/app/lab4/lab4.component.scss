@@ -17,7 +17,16 @@
 
     .feedback {
       position: absolute;
-      bottom: -20px;
+      top: 35px;
+      display: block;
+
+      div {
+        margin-top: -5px;
+      }
+
+      div:first-child {
+        margin: 0;
+      }
     }
   }
 }
