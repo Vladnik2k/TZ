@@ -1,36 +1,11 @@
 import {AbstractControl, ValidatorFn} from '@angular/forms';
-
-export const enum keysEnum {
-  REQUIRED = 'required',
-  FORBIDDEN_DICTIONARY= 'forbiddenDictionary',
-  AT_LEAST_BIG_LETTER = 'atLeastBigLetter',
-  AT_LEAST_SMALL_LETTER = 'atLeastSmallLetter',
-  AT_LEAST_ONE_DIGIT = 'atLeastOneDigit',
-  AT_LEAST_ADD_SYMBOL = 'atLeastOneAddSymbol',
-  NOT_LESS_SYMBOLS = 'notLessSymbols',
-  NOT_MORE_SYMBOLS = 'notMoreSymbols',
-}
+import {keysEnum, NewPassErrors} from './new.pass.errors';
+import {Dictionary} from './dictionary';
 
 export class NewPasswordValidators {
-  static forbiddenWords = [
-    'aaa',
-    'bbb'
-  ];
-
-  static errorsMapping = [
-    { key: keysEnum.REQUIRED, message: 'Пароль повинен бути не пустий' },
-    { key: keysEnum.FORBIDDEN_DICTIONARY, message: 'Заборонений згідно словнику', additionalValue: 2 },
-    { key: keysEnum.AT_LEAST_BIG_LETTER, message: 'Потрібна хоча б одна велика буква' },
-    { key: keysEnum.AT_LEAST_SMALL_LETTER, message: 'Потрібна хоча б одна маленька буква' },
-    { key: keysEnum.AT_LEAST_ONE_DIGIT, message: 'Потрібна хоча б одна цифра' },
-    { key: keysEnum.AT_LEAST_ADD_SYMBOL, message: 'Потрібнен хоча б один спецсимвол' },
-    { key: keysEnum.NOT_LESS_SYMBOLS, message: 'Мінімальна кількість символів: ', additionalValue: 4 },
-    { key: keysEnum.NOT_MORE_SYMBOLS, message: 'Максимальна кількість символів: ', additionalValue: 6 },
-  ];
-
   static forbiddenDictionaryValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      return this.forbiddenWords
+      return Dictionary
         .slice(0, this.getAddValue(keysEnum.FORBIDDEN_DICTIONARY))
         .find(word => word === control.value) ? {forbiddenDictionary: true} : null;
     };
@@ -75,7 +50,7 @@ export class NewPasswordValidators {
   static getErrorMessages(errors): Array<string> {
     return Object.keys(errors)
       .map(error => {
-        const errorMap = this.errorsMapping.find(mapping => mapping.key === error);
+        const errorMap = NewPassErrors.find(mapping => mapping.key === error);
         if (error === keysEnum.NOT_LESS_SYMBOLS || error === keysEnum.NOT_MORE_SYMBOLS) {
           return errorMap.message + errorMap.additionalValue;
         }
@@ -83,7 +58,7 @@ export class NewPasswordValidators {
       });
   }
 
-  static getAddValue(key: keysEnum): any {
-    return this.errorsMapping.find(mapping => mapping.key === key).additionalValue;
+  static getAddValue(key: keysEnum): number {
+    return +NewPassErrors.find(mapping => mapping.key === key).additionalValue;
   }
 }

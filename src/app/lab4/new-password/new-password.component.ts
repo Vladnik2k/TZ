@@ -3,11 +3,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NewPasswordValidators} from './new-password-validators';
 
 @Component({
-  selector: 'app-lab4',
-  templateUrl: './lab4.component.html',
-  styleUrls: ['./lab4.component.scss']
+  selector: 'app-new-password',
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.scss']
 })
-export class Lab4Component implements OnInit {
+export class NewPasswordComponent implements OnInit {
 
   password: string;
   addPasswordForm: FormGroup;

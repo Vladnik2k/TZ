@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { Lab3Component } from './lab3/lab3.component';
+import {Lab3Component} from './lab3/lab3.component';
 import {AppRoutingModule} from './app-routing.module';
-import { Lab4Component } from './lab4/lab4.component';
+import {NewPasswordComponent} from './lab4/new-password/new-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Lab3Component,
-    Lab4Component
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule,
