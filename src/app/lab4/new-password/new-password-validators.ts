@@ -52,7 +52,7 @@ export class NewPasswordValidators {
       .map(error => {
         const errorMap = NewPassErrors.find(mapping => mapping.key === error);
         if (error === keysEnum.NOT_LESS_SYMBOLS || error === keysEnum.NOT_MORE_SYMBOLS) {
-          return errorMap.message + errorMap.additionalValue;
+          return errorMap.message + (errorMap.additionalValue ? errorMap.additionalValue : 0);
         }
         return errorMap.message;
       });

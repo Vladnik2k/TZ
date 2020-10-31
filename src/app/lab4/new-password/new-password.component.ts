@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NewPasswordValidators} from './new-password-validators';
+import {ErrorInfo, NewPassErrors} from './new.pass.errors';
 
 @Component({
   selector: 'app-new-password',
@@ -9,8 +10,9 @@ import {NewPasswordValidators} from './new-password-validators';
 })
 export class NewPasswordComponent implements OnInit {
 
-  password: string;
+  password = '';
   addPasswordForm: FormGroup;
+  newPassErrors = NewPassErrors;
 
   get isNewValid(): boolean {
     return this.addPasswordForm.controls.newPassword.valid;
@@ -47,4 +49,11 @@ export class NewPasswordComponent implements OnInit {
     this.addPasswordForm.controls.newPassword.updateValueAndValidity();
   }
 
+  inputChange(errorInfo: ErrorInfo): void {
+    if (!+errorInfo.additionalValue) {
+      errorInfo.additionalValue = 0;
+    }
+
+    this.updateNew();
+  }
 }
