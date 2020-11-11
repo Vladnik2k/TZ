@@ -1,6 +1,7 @@
 import {AbstractControl, ValidatorFn} from '@angular/forms';
-import {keysEnum, NewPassErrors} from './new.pass.errors';
+import {NewPassErrors} from './new.pass.errors';
 import {Dictionary} from './dictionary';
+import {keysEnum} from '../shared.models';
 
 export class NewPasswordValidators {
   static forbiddenDictionaryValidator(): ValidatorFn {
