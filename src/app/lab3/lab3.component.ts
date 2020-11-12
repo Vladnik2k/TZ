@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MethodEnum} from './method.enum';
 import {Settings} from './settings';
 import {AlgorithmBase} from './algorithms/algorithm-base';
@@ -6,13 +6,14 @@ import {PartStatusesEnum} from './part/part-statuses.enum';
 import {Symbol} from './algorithms/symbol';
 import {Standard} from './algorithms/standard';
 import {en} from './constants';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-lab3',
   templateUrl: './lab3.component.html',
   styleUrls: ['./lab3.component.scss']
 })
-export class Lab3Component {
+export class Lab3Component implements OnInit {
   text: string;
   selectedMethod: MethodEnum;
   settings: Settings;
@@ -24,8 +25,18 @@ export class Lab3Component {
   translatedText: string;
   translatedMethod: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.settings = new Settings();
+  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('password')) {
+      if (!localStorage.getItem('isLab3Available')) {
+        this.router.navigate(['/lab4/enter-pass']);
+      }
+    } else {
+      this.router.navigate(['/lab4/create-pass']);
+    }
   }
 
   click(): void {

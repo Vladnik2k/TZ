@@ -6,12 +6,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Lab3Component} from './lab3/lab3.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NewPasswordComponent} from './lab4/new-password/new-password.component';
+import { EnterPasswordComponent } from './lab4/enter-password/enter-password.component';
+import {PassService} from './lab4/pass.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     Lab3Component,
-    NewPasswordComponent
+    NewPasswordComponent,
+    EnterPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,7 @@ import {NewPasswordComponent} from './lab4/new-password/new-password.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
