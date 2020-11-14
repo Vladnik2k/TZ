@@ -26,21 +26,18 @@ export class NewPasswordComponent implements OnInit {
     this.addPasswordForm = new FormGroup({
       newPassword: new FormControl('')
     });
-    this.getPasswordSettings();
+    this.setPasswordSettings();
     this.changeCheckboxes();
-    this.getPasswordFromLocalHost();
+    this.password = localStorage.getItem('password');
   }
 
   save(): void {
     localStorage.setItem('password', this.addPasswordForm.controls.newPassword.value);
-    this.getPasswordFromLocalHost();
-  }
-
-  getPasswordFromLocalHost(): void {
+    localStorage.setItem('isLab3Available', String(false));
     this.password = localStorage.getItem('password');
   }
 
-  getPasswordSettings(): void {
+  setPasswordSettings(): void {
     const newPassErrors = localStorage.getItem('newPassErrors');
     const oldPassErrors = localStorage.getItem('oldPassErrors');
 
@@ -55,8 +52,8 @@ export class NewPasswordComponent implements OnInit {
     this.newPassErrors = PassService.newPassErrors;
   }
 
-  getErrors(field): Array<string> {
-    if (field === 'newPassword' && !this.isNewValid) {
+  getErrors(): Array<string> {
+    if (!this.isNewValid) {
       return PassService.getErrorMessages(this.addPasswordForm.controls.newPassword.errors);
     }
   }
@@ -64,7 +61,6 @@ export class NewPasswordComponent implements OnInit {
   updateNew(): void {
     this.addPasswordForm.controls.newPassword.updateValueAndValidity();
     setTimeout(() => {
-      console.log('asd');
       localStorage.setItem('newPassErrors', JSON.stringify(PassService.newPassErrors));
       localStorage.setItem('oldPassErrors', JSON.stringify(PassService.oldPassErrors));
     });
