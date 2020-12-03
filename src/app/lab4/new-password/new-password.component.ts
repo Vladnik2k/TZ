@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ErrorInfo, keysEnum} from '../shared.models';
 import {PassService} from '../pass.service';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-new-password',
@@ -19,10 +21,15 @@ export class NewPasswordComponent implements OnInit {
     return this.addPasswordForm.controls.newPassword.valid;
   }
 
-  constructor() {
+  constructor(private router: Router, private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.http.get('http://localhost:3001/').subscribe((data: any) => {
+      if (data.status === 'no') {
+        this.router.navigate(['/lab5']);
+      }
+    });
     this.addPasswordForm = new FormGroup({
       newPassword: new FormControl('')
     });

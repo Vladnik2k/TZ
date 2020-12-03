@@ -7,6 +7,7 @@ import {Symbol} from './algorithms/symbol';
 import {Standard} from './algorithms/standard';
 import {en} from './constants';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-lab3',
@@ -25,13 +26,18 @@ export class Lab3Component implements OnInit {
   translatedText: string;
   translatedMethod: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.settings = new Settings();
   }
 
   ngOnInit(): void {
+    this.http.get('http://localhost:3001/').subscribe((data: any) => {
+      if (data.status === 'no') {
+        this.router.navigate(['/lab5']);
+      }
+    });
     if (localStorage.getItem('password')) {
-      if (!localStorage.getItem('isLab3Available')) {
+      if (localStorage.getItem('isLab3Available') === 'false') {
         this.router.navigate(['/lab4/enter-pass']);
       }
     } else {
@@ -74,5 +80,15 @@ export class Lab3Component implements OnInit {
       }
     }
     this.settings.code = newCode;
+  }
+
+  changeLocal(): void {
+    this.http.get('http://localhost:3001/set').subscribe(_ => {
+      this.http.get('http://localhost:3001/').subscribe((data: any) => {
+        if (data.status === 'no') {
+          this.router.navigate(['/lab5']);
+        }
+      });
+    });
   }
 }

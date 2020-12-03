@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {PassService} from '../pass.service';
 import {ErrorInfo, keysEnum} from '../shared.models';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-enter-password',
@@ -20,12 +21,17 @@ export class EnterPasswordComponent implements OnInit {
   disableInterval;
   secondForShow;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.checkRedirect();
     this.setPasswordSettings();
     this.startAll();
+    this.http.get('http://localhost:3001/').subscribe((data: any) => {
+      if (data.status === 'no') {
+        this.router.navigate(['/lab5']);
+      }
+    });
   }
 
   checkRedirect(): void {
